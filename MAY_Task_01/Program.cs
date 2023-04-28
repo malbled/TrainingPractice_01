@@ -8,22 +8,22 @@ namespace MAY_Task_01
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Введите количество имеющегося золота >> ");
-            int Gold_count;
+            double Gold_count;
             string Str = Console.ReadLine();
-            while (!int.TryParse(Str, out _))
+            while (!double.TryParse(Str, out _))
             {
                 Console.WriteLine("Неправильный ввод\n");
                 Console.Write("Введите количество имеющегося золота >> ");
                 Str = Console.ReadLine();
             }
-            Gold_count = Convert.ToInt32(Str);
+            Gold_count = Convert.ToDouble(Str);
             Console.WriteLine();
             int Сrystal_price = 3;
-            Console.WriteLine("Вы можете купить максимум " + Gold_count / Сrystal_price + " кристалов по цене " + Сrystal_price + " за штуку");
+            Console.WriteLine("Вы можете купить максимум " + Convert.ToInt32( Gold_count) / Сrystal_price + " кристалов по цене " + Сrystal_price + " за штуку");
             Console.Write("Сколько кристаллов вы хотите купить ? >> ");
-            int Crystal_get;
+            int Crystal_get = 0;
             Str = Console.ReadLine();
-            while (!int.TryParse(Str, out _) || Convert.ToInt32(Str) > Gold_count / Сrystal_price)
+            while (!int.TryParse(Str, out _) || Convert.ToInt32(Str) < 0 || Convert.ToInt32(Str) > Convert.ToInt32(Gold_count) / Сrystal_price)
             {
                 if (!int.TryParse(Str, out _))
                 {
@@ -31,9 +31,15 @@ namespace MAY_Task_01
                     Console.Write("Сколько кристаллов вы хотите купить ? >> ");
                     Str = Console.ReadLine();
                 }
+                if(Convert.ToInt32(Str) < 0)
+                {
+                    Console.WriteLine("Неправильный ввод\n");
+                    Console.Write("Сколько кристаллов вы хотите купить ? >> ");
+                    Str = Console.ReadLine();
+                }
                 else
                 {
-                    Console.WriteLine("Вы можете купить максимум " + Gold_count / Сrystal_price + " кристалов по цене " + Сrystal_price + " за штуку\n");
+                    Console.WriteLine("Вы можете купить максимум " + Convert.ToInt32(Gold_count) / Сrystal_price + " кристалов по цене " + Сrystal_price + " за штуку\n");
                     Console.Write("Сколько кристаллов вы хотите купить ? >> ");
                     Str = Console.ReadLine();
                 }

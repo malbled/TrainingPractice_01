@@ -1,10 +1,17 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace MAY_Task_07
 {
     internal class Program
     {
+        static int Next(RNGCryptoServiceProvider random)
+        {
+            byte[] randomInt = new byte[4];
+            random.GetBytes(randomInt);
+            return Convert.ToInt32(randomInt[0]);
+        }
         static void Main(string[] args)
         {
             Console.Write("Введите размер массива >> ");
@@ -25,14 +32,15 @@ namespace MAY_Task_07
                 mas[i] = rand.Next(1, 50);
                 Console.Write(mas[i] + " ");
             }
-            Console.WriteLine("\n\n↓ Перемешанный массив ↓\n");
-            Random random = new Random();
-            mas = mas.OrderBy(x => random.Next()).ToArray();
+            Console.WriteLine("\n\n↓ Перемешанный массив ↓\n");       
+            RNGCryptoServiceProvider random = new RNGCryptoServiceProvider();
+            mas = mas.OrderBy(x => Next(random)).ToArray();
             foreach (var i in mas)
             {
                 Console.Write(i + " ");
             }
             Console.ReadKey();
         }
+        
     }
 }
